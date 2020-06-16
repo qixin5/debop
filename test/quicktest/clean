@@ -1,0 +1,7 @@
+#!/bin/bash
+
+rm -fr output
+rm -fr debop-out
+rm -fr *.txt
+rm -fr source
+rm -fr source.origin

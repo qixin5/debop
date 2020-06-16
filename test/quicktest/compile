@@ -1,0 +1,6 @@
+#!/bin/bash
+
+SRC=$1
+BIN=$2
+
+gcc -O3 -o $BIN $SRC

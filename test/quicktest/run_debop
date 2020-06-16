@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cp source.c.origin.c source.c
+../../build/bin/reducer -m 5 -i 100 -a 0.5 -e 0.5 -k 30 -s ./test.sh source.c

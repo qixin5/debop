@@ -1,0 +1,17 @@
+#!/bin/bash
+
+output_d1=$1
+output_d2=$2
+rslt_f=$3
+
+> ${rslt_f}
+
+for output_f1 in ${output_d1}/*
+do
+    fname=$(basename ${output_f1})
+    if diff -q ${output_f1} ${output_d2}/${fname} &> ./difftmp; then
+	echo "pass-${fname}" >> ${rslt_f}
+    fi
+done
+
+rm difftmp

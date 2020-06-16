@@ -1,0 +1,42 @@
+#!/bin/bash
+
+BIN=$1
+OUTDIR=$2
+TIMEOUT=$3
+CURRDIR=$(pwd)
+
+#Clean
+if [ ! -d $OUTDIR ]; then
+    mkdir -p $OUTDIR
+else
+    rm -fr $OUTDIR/*
+fi
+
+#Copy input files, if possible
+if [ -d $CURRDIR/inputfile.original.kn ]; then
+    cp -r $CURRDIR/inputfile.original.kn $CURRDIR/inputfile
+fi
+
+#Use a tmp directory for execution
+if [ ! -d $CURRDIR/tmp ]; then
+    mkdir $CURRDIR/tmp
+else
+    chmod 755 -R $CURRDIR/tmp
+    rm -fr $CURRDIR/tmp/*
+fi
+cd $CURRDIR/tmp
+
+#Execute with every test
+for testf in $CURRDIR/testscript/*
+do
+    ${testf} $BIN $OUTDIR $TIMEOUT
+    chmod 755 -R $CURRDIR/tmp
+    rm -fr $CURRDIR/tmp/*
+done
+rm -fr $CURRDIR/tmp
+
+#Remove input files, if possible
+if [ -d $CURRDIR/inputfile ]; then
+    chmod 755 -R $CURRDIR/inputfile
+    rm -fr $CURRDIR/inputfile
+fi

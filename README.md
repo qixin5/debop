@@ -29,18 +29,31 @@ Once you have all the requirements, do the following steps.
 ```
 DEBOP_BIN [OPTION] ORACLE_FILE SOURCE_FILE
 ```
-DEBOP_BIN: The debop binary (XXX/debop_release/build/bin/reducer).
-ORACLE_FILE: The oracle script used to compile source, run tests, and compute scores. It should compute a total of six scores: (1) original program size, (2) reduced program size, (3) original program gadgets, (4) reduced program gadgets, (5) number of total tests, and (6) number of passed tests. The resulting scores should be redirected to a file named "eval_rslt.txt". See XXX/debop_release/test/quicktest/test.sh for an example.
-SOURCE_FILE: The program source file(s).
-OPTION:
-*-m: Number of samples.
-*-i: Number of sampling iterations. (Default is 100. Consider passing a large value.)
-*-a: Alpha value (weight for attack surface reduction).
-*-e: Beta value (weight for generality).
-*-k: K value (for computing density values).
-*-s: No value needed. Save temp files.
+**DEBOP_BIN**: The debop binary (build/bin/reducer).
 
-###Note
+**ORACLE_FILE**: The oracle script used to compile source, run tests, and compute scores. It should compute a total of six scores:
+1. Size of original program
+2. Size of reduced program
+3. Number of gadgets in original program
+4. Number of gadgets in reduced program
+5. Number of total tests
+6. Number of tests the program passes
+The resulting scores should be redirected to a file named "eval_rslt.txt".
+See `test/quicktest/test.sh` for an example.
+
+**SOURCE_FILE**: The program source file(s).
+
+**OPTION**:
+```
+-m: Number of samples.
+-i: Number of sampling iterations. (Default is 100. Consider using a large value.)
+-a: Alpha value (weight for attack surface reduction).
+-e: Beta value (weight for generality).
+-k: K value (for computing density values).
+-s: No value needed. Save temp files.
+```
+
+### Note
 It is strongly recommended that you provide Debop with a source file with all the code unexercised by the oracle inputs eliminated. This would make Debop's search space significantly smaller. To produce such a file, please refer to https://github.com/qixin5/debcov.
 
 ## Contact

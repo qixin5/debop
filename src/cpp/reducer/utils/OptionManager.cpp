@@ -39,7 +39,8 @@ void OptionManager::showUsage() {
       << "  --beta BETA   The weight (b/w 0 and 1 inclusive) of G-Score. The weight of R-Score is (1-BETA). O-Score is ((1-BETA)*R-Score + BETA*G-Score)\n"
       << "  --kvalue KVALUE The k-value for computing density value\n"
       << "  --genfactor GENFACTOR The discounting factor for computing generality\n"
-      << "  --elem_select_prob The probability of selecting an element for mutation\n";
+      << "  --elem_select_prob The probability of selecting an element for mutation\n"
+      << "  --basic_block          Use MCMC at the Basic Block level, otherwise at the statement level";
 }
 
 static struct option long_options[] = {
@@ -65,9 +66,10 @@ static struct option long_options[] = {
     {"kvalue", required_argument, 0, 'k'},
     {"genfactor", required_argument, 0, 'z'},
     {"elem_select_prob", required_argument, 0, 'j'},
+    {"basic_block", no_argument, 0, 'B'},
     {0, 0, 0, 0}};
 
-static const char *optstring = "ho:t:sDdglcLGCpvSm:i:a:e:k:z:j:";
+static const char *optstring = "ho:t:sDdglcLGCpvSm:i:a:e:k:z:j:B";
 
 std::string OptionManager::BinFile = "";
 std::vector<std::string> OptionManager::InputFiles;
@@ -90,6 +92,7 @@ bool OptionManager::SkipDCE = false;
 bool OptionManager::Profile = true;
 bool OptionManager::Debug = false;
 bool OptionManager::Stat = false;
+bool OptionManager::BasicBlock = false;
 int OptionManager::MaxSamples = 5;
 int OptionManager::MaxIters = 100;
 float OptionManager::Alpha = 0.5;
@@ -164,6 +167,10 @@ void OptionManager::handleOptions(int argc, char *argv[]) {
 
     case 'S':
       OptionManager::Stat = true;
+      break;
+
+    case 'B':
+      OptionManager::BasicBlock = true;
       break;
 
     case 'm':

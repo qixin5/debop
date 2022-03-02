@@ -28,6 +28,7 @@ public:
   static bool Profile;
   static bool Debug;
   static bool Stat;
+  static bool BasicBlock;
   static int MaxSamples;
   static int MaxIters;
   static float Alpha;

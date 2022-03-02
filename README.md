@@ -51,6 +51,7 @@ See `test/quicktest/test.sh` for an example.
 -e: Beta value (weight for generality).
 -k: K value (for computing density values).
 -s: No value needed. Save temp files.
+-B: If you want to use MCMC at the BasicBlock level, add this option.
 ```
 
 ### Note
